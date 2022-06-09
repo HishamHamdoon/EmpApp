@@ -1,0 +1,78 @@
+﻿@model EmpApp.ViewModels.HomeDetailsViewModel
+@{ 
+    var photoPath ="~/images/"+ (Model.Employee.PhotoPath?? "avatar.webp");
+    
+}
+@*<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>@ViewBag.Title</title>
+    </head>
+    <body>*@
+<h1>This is Details View </h1>
+@*using ViewData*@
+@*<p>@{var emp = ViewData["Employee"] as EmpApp.Models.Employee;}</p>
+
+    <div>Name : @emp.Name</div>
+
+    <div>
+        Email :@emp.Email
+    </div>
+    <div>
+        Department : @emp.Department
+    </div>*@
+
+
+@*using ViewBag*@
+@*<div>Name : @ViewBag.Employee.Name</div>
+
+    <div>
+        Email :@ViewBag.Employee.Email
+    </div>
+    <div>
+        Department : @ViewBag.Employee.Department
+    </div>*@
+
+@*using strongly typed View*@
+
+@*<div>
+            @Model.Employee.Name
+        </div>
+        <div>
+            @Model.Employee.Email
+        </div>
+        <div>
+            @Model.Employee.Department
+        </div>
+    </body>*@
+@*</html>*@
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card-deck">
+
+            <div class="card m-3">
+                <div class="card-header">
+                    <h3 class="h3">
+                        @Model.Employee.Name
+                    </h3>
+
+                </div>
+                <img src="@photoPath" alt="Alternate Text" asp-append-version="true" />
+                <div class="card-body">
+                    <p> Name : @Model.Employee.Name</p>
+                    <p>Email : @Model.Employee.Email</p>
+                    <p>Department : @Model.Employee.Department</p>
+                </div>
+                <div class="card-footer text-center">
+
+                    <a asp-controller="home" asp-action="index" asp-route-id="@Model.Employee.Id" class="btn btn-primary">Back</a>
+
+                    <a asp-controller="home" asp-action="edit" asp-route-id="@Model.Employee.Id" class="btn btn-primary">Edit</a>
+
+                    <a asp-controller="home" asp-action="details" asp-route-id="@Model.Employee.Id" class="btn btn-danger">Delete</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

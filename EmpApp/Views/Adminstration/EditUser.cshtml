@@ -1,0 +1,56 @@
+﻿@model EditUserViewModel
+@{ 
+    ViewBag.Title = "EditUsers";
+}
+<h1>Edit Users</h1>
+<form asp-action="EditUser" asp-controller="Adminstration" method="post">
+    <div class="form-group">
+        <label asp-for="Id"></label>
+        <input asp-for="Id" disabled class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="UserName"></label>
+        <input asp-for="UserName" class="form-control" />
+        <span class="text-danger" asp-validation-for="UserName"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span class="text-danger" asp-validation-for="Email"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="City"></label>
+        <input asp-for="City" class="form-control" />
+        <span class="text-danger" asp-validation-for="City"></span>
+    </div>
+    <div class="form-group">
+        <a asp-controller="Adminstration" asp-action="ListUsers" class="btn btn-danger">Cancel</a>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </div>
+    @*@if(Model.Roles.Any()){*@
+    <div class="card mb-3">
+        <div class="card-header">
+            User Roles
+        </div>
+        <div class="card-body">
+            No users yet
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary">Manager Roles</button>
+        </div>
+    </div>
+
+    }
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Users Claims
+        </div>
+        <div class="card-body">
+            No Claims
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary">Manager Roles</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,73 @@
+﻿@model EmployeeEditViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    var photoPath = "/images/" + (Model.ExistingPhotoPath ?? "avatar.webp");
+
+}
+
+<h1>Edit Employee </h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <input hidden asp-for="Id" />
+            <input hidden asp-for="ExistingPhotoPath" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Department" class="control-label"></label>
+                <select asp-for="Department" class="form-control" asp-items="Html.GetEnumSelectList<Dept>()"> </select>
+                <span asp-validation-for="Department" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Photo" class="control-label"></label>
+                <input multiple asp-for="Photo" id="imgInp" class="form-control custome-file-input" />
+            </div>
+            <img src="@photoPath" alt="Alternate Text" id="prview" class="image-preview img image-class" asp-append-version="true">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <a asp-action="index" asp-controller="home" class="btn btn-primary">Cancel</a>
+                <input type="submit" value="Update" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.custome-file-input').on("change", function () {
+                console.log($(this));
+            });
+        });
+   
+        //image preview
+        imgInp.onchange = evt => {
+            const [file] = imgInp.files
+            if (file) {
+                prview.style.visibility = 'visible';
+
+                prview.src = URL.createObjectURL(file)
+            }
+        }
+    </script>
+
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

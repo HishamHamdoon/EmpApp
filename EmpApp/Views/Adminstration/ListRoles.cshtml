@@ -1,0 +1,57 @@
+﻿@model IEnumerable<IdentityRole>
+@{
+    ViewBag.Title = "Roles List";
+}
+
+@if (Model.Any())
+{
+    <a class="btn btn-primary" style="width:auto" asp-action="CreateRole" asp-controller="Adminstration">Add New Role</a>
+    foreach (var role in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                Role Id: @role.Id
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@role.Name</h5>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-primary" asp-action="EditRole" asp-controller="Adminstration" asp-route-id="@role.Id">Edit</a>
+                <div>
+                    <form asp-action="DeleteRole" asp-controller="Adminstration" method="post">
+
+
+                        <span id="confirmDeletespan_@role.Id" style="display:none;">
+                            <span>Ary You Sure You Want to Delete This record ?</span>
+                            <button type="submit" class="btn btn-danger"
+                                    asp-action="DeleteRole" asp-controller="Adminstration"
+                                    asp-route-id="@role.Id">
+                                Yes
+                            </button>
+                            <a href="#" class="btn btn-primary" onclick="confirmDelete('@role.Id', false)">No</a>
+                        </span>
+
+                        <span id="deleteSpan_@role.Id">
+                            <a href="#" class="btn btn-danger"
+                               onclick="confirmDelete('@role.Id', true)">Delete</a>
+                        </span>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="card">
+        <div class="card-header">No Card Yet</div>
+        <div class="card-body">Click Button below To create Role</div>
+        <button class="btn btn-primary" asp-action="CreateRole" asp-controller="Adminstration">Create Role</button>
+    </div>
+}
+@section Scripts{
+    <script src="~/js/site.js"></script>
+}
+
+
